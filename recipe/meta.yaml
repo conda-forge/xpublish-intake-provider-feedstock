@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/xpublish-intake-provider-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/xpublish-intake-provider-{{ version }}.tar.gz
   sha256: 821d89f339c26f2e386579482b2ff5f89879ccc29933d24a333f577b28b784e2
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.9
+    - python {{ python_min }}
     - setuptools >=42
     - setuptools-scm >=3.4
     - wheel
     - pip
   run:
-    - python >=3.9
+    - python >={{ python_min }}
     - aiohttp
     - intake
     - numpy
@@ -36,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/xpublish-community/xpublish-intake-provider
